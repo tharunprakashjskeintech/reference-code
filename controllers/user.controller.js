@@ -42,7 +42,7 @@ const UserController = {
 
 async  createAdminUser(req, res) {
 
-    let {role_id, email_id, phone_no, first_name,address,city,country,network_type,zip_code,network_name,security_type,security_password,router_picture,contacts,parent_id } = req.body
+    let {role_id, email_id, phone_no, first_name,address,city,country,network_type,zip_code,network_name,security_type,security_password,router_picture,contacts,parent_id,delivery_address } = req.body
     try {
         if(Role.ADMIN_USER == role_id){
         let [profile_data] = await UserModel.createAdminUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code
@@ -68,7 +68,7 @@ async  createAdminUser(req, res) {
         }
             
         }else if(Role.TABLET_USER == role_id){
-            let [profile_data] = await UserModel.createUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code,network_name,security_type,security_password,router_picture,parent_id
+            let [profile_data] = await UserModel.createUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code,network_name,security_type,security_password,router_picture,delivery_address,parent_id
             })
             profile_data = profile_data instanceof Array ? profile_data[0] : profile_data
             if(contacts){

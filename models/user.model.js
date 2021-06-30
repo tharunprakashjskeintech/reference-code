@@ -22,12 +22,12 @@ const UserModel = {
     },
 
     async createUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code,
-        network_name,security_type,security_password,router_picture,parent_id}) {
+        network_name,security_type,security_password,router_picture,delivery_address,parent_id}) {
 
         let query;
         query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,address,city,country,zip_code,parent_id,password:uniqid.time()});
         console.log("insert id ",QueryGenerator.LAST_INSERTID);
-        query += `;${QueryGenerator.insert(`meety_user_security_details`, { user_id: QueryGenerator.LAST_INSERTID, network_name,security_type,security_password,router_picture })}`
+        query += `;${QueryGenerator.insert(`meety_user_security_details`, { user_id: QueryGenerator.LAST_INSERTID, network_name,security_type,security_password,router_picture,delivery_address })}`
 
         // Query generator can generate a insert query based on object we passed
         return await database.promise().query(query)
