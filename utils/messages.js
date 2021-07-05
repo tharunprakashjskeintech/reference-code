@@ -101,58 +101,7 @@ module.exports.Message = {
     },
 
 
-    VendingMachine: {
-        SuccessMessage: {
-            Create: "Vending machine created successfully !",
-            Update: "Vending machine updated successfully !",
-            Delete: "Vending machine deleted successfully !",
-            Fetch: "Vending machines fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Vending machine creation failed, kindly retry !",
-            Update: "Vending machine updation failed, kindly retry !",
-            Delete: "Vending machine deletion failed, kindly retry !",
-            NotFound: "Vending machine not found !",
-            AlreadyExists: "Vending machine already exists !",
-        }
-    },
-
-    Workout: {
-        SuccessMessage: {
-            Create: "Workout created successfully !",
-            Update: "Workout updated successfully !",
-            Delete: "Workout deleted successfully !",
-            Fetch: "Workout fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Workout creation failed, kindly retry !",
-            Update: "Workout updation failed, kindly retry !",
-            Delete: "Workout deletion failed, kindly retry !",
-            NotFound: "Workout videos not found !",
-            IdNotFound: "Workout id is missing !",
-            AlreadyExists: "Workout already exists !",
-        }
-    },
-
-    Cart: {
-        SuccessMessage: {
-            Create: "Cart created successfully !",
-            Update: "Cart updated successfully !",
-            Delete: "Cart deleted successfully !",
-            Fetch: "Cart fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Cart creation failed, kindly retry !",
-            Update: "Cart updation failed, kindly retry !",
-            Delete: "Cart deletion failed, kindly retry !",
-            NotFound: "Cart not found !",
-            IdNotFound: "Cart id is missing !",
-            AlreadyExists: "Cart already exists !",
-        }
-    },
+    
     Order: {
         SuccessMessage: {
             Create: "Order created successfully !",
@@ -172,61 +121,7 @@ module.exports.Message = {
             AlreadyExists: "Order already exists !",
         }
     },
-    Commission: {
-        SuccessMessage: {
-            Create: "Commission intiated created successfully !",
-            Update: "Commission process updated successfully !",
-            Cancel: "Commission cancelled successfully !",
-
-            Delete: "Commission deleted successfully !",
-            Fetch: "Commission fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Commission intiation failed, kindly retry !",
-            Update: "Commission process updation failed, kindly retry !",
-            Delete: "Commission deletion failed, kindly retry !",
-            NotFound: "No Commission  found !",
-            IdNotFound: "Commission id is missing !",
-            AlreadyExists: "Commission request already exists !",
-        }
-    },
-    WithdrawRequest: {
-        SuccessMessage: {
-            Create: "WithdrawRequest created successfully !",
-            Update: "WithdrawRequest updated successfully !",
-            Cancel: "WithdrawRequest cancelled successfully !",
-
-            Delete: "WithdrawRequest deleted successfully !",
-            Fetch: "WithdrawRequest fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "WithdrawRequest creation failed, kindly retry !",
-            Update: "WithdrawRequest updation failed, kindly retry !",
-            Delete: "WithdrawRequest deletion failed, kindly retry !",
-            NotFound: "No WithdrawRequest found !",
-            IdNotFound: "WithdrawRequest id is missing !",
-            AlreadyExists: "WithdrawRequest already exists !",
-        }
-    },
-    Coupon: {
-        SuccessMessage: {
-            Create: "Coupon created successfully !",
-            Update: "Coupon updated successfully !",
-            Delete: "Coupon deleted successfully !",
-            Fetch: "Coupon fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Coupon creation failed, kindly retry !",
-            Update: "Coupon updation failed, kindly retry !",
-            Delete: "Coupon deletion failed, kindly retry !",
-            NotFound: "Coupon videos not found !",
-            IdNotFound: "Coupon id is missing !",
-            AlreadyExists: "Coupon already exists !",
-        }
-    },
+   
     Dashboard: {
         SuccessMessage: {
             Fetch: "Dashboard fetched successfully !"
@@ -235,40 +130,7 @@ module.exports.Message = {
             NotFound: "Dashboard not found !",
         }
     },
-    BankAccount: {
-        SuccessMessage: {
-            Create: "Bank account created successfully !",
-            Update: "Bank account updated successfully !",
-            Delete: "Bank account deleted successfully !",
-            Fetch: "Bank account fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Bank account creation failed, kindly retry !",
-            Update: "Bank account updation failed, kindly retry !",
-            Delete: "Bank account deletion failed, kindly retry !",
-            NotFound: "Bank account videos not found !",
-            IdNotFound: "Bank account id is missing !",
-            AlreadyExists: "Bank account already exists !",
-        }
-    },
-
-
-    Log: {
-        SuccessMessage: {
-            Create: "Logs created successfully !",
-            Update: "Logs updated successfully !",
-            Delete: "Logs deleted successfully !",
-            Fetch: "Logs fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Logs creation failed, kindly retry !",
-            Update: "Logs updation failed, kindly retry !",
-            Delete: "Logs deletion failed, kindly retry !",
-            NotFound: "Logs not found !",
-        }
-    },
+    
     Validation: {
         FailureMessage: {
             DataTypeError(data, type) { return `${data} must be ${type}` },
@@ -277,91 +139,20 @@ module.exports.Message = {
             Password: "Password must be atleast 6-20 characters"
         }
     },
-    ProductManagement: {
+    SubscriptionManagement: {
         SuccessMessage: {
-            Create: "Product created successfully !",
-            Update: "Product updated successfully !",
-            Delete: "Product deleted successfully !",
-            Fetch: "Product fetched successfully !",
-            Disable: "Product disabled successfully !",
-            Enable: "Product Enabled successfully !"
-
+            Create: "Subscription plan created successfully !",
+            Update: "Subscription plan updated successfully !",
+            Delete: "Subscription plan deleted successfully !",
+            Fetch: "Subscription plan fetched successfully !",
         },
         FailureMessage: {
-            Create: "Product creation failed, kindly retry !",
-            Update: "Product updation failed, kindly retry !",
-            Delete: "Product deletion failed, kindly retry !",
-            NotFound: "Product not found !",
-            AlreadyExists: "Product already exists !",
-            Disable: "Product disabled failed , kindly retry !",
-            Enable: "Product Enabled failed , kindly retry !"
-
+            Create: "Subscription plan failed, kindly retry !",
+            Update: "Subscription plan updation failed, kindly retry !",
+            Delete: "Subscription plan deletion failed, kindly retry !",
+            NotFound: "No Subscription plan found !"
         }
     },
-    RefillAgentManagement: {
-        SuccessMessage: {
-            Create: "Refill agent task created successfully !",
-            Update: "Refill agent task updated successfully !",
-            Delete: "Refill agent task deleted successfully !",
-            Fetch: "Refill agent task fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Refill agent task creation failed, kindly retry !",
-            Update: "Refill agent task updation failed, kindly retry !",
-            Delete: "Refill agent task deletion failed, kindly retry !",
-            NotFound: "Refill agent task not found !",
-            AlreadyExists: "Refill agent task already exists !",
-        }
-    },
-    TechnicianManagement: {
-        SuccessMessage: {
-            Create: "Technician task created successfully !",
-            Update: "Technician task updated successfully !",
-            Delete: "Technician task deleted successfully !",
-            Fetch: "Technician task fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Technician creation failed, kindly retry !",
-            Update: "Technician updation failed, kindly retry !",
-            Delete: "Technician deletion failed, kindly retry !",
-            NotFound: "Technician not found !",
-            AlreadyExists: "Technician already exists !",
-        }
-    },
-    HealthManagement: {
-        SuccessMessage: {
-            Create: "Health log task created successfully !",
-            Update: "Health log task updated successfully !",
-            Delete: "Health log task deleted successfully !",
-            Fetch: "Health log task fetched successfully !"
-
-        },
-        FailureMessage: {
-            Create: "Health log task creation failed, kindly retry !",
-            Update: "Health log task updation failed, kindly retry !",
-            Delete: "Health log task deletion failed, kindly retry !",
-            NotFound: "Health log task not found !",
-            AlreadyExists: "Health log task already exists !",
-        }
-    },
-    RewardsManagement: {
-        SuccessMessage: {
-            Create: "Rewards created successfully !",
-            Disable: "Rewards disabled successfully !",
-            Fetch: "Technician task fetched successfully !",
-        },
-        FailureMessage: {
-            Create: "Rewards creation failed, kindly retry !",
-            Update: "Technician updation failed, kindly retry !",
-            Delete: "Technician deletion failed, kindly retry !",
-            Disable: "Rewards disabled failed, kindly retry !",
-
-            NotFound: "Technician not found !",
-            AlreadyExists: "Technician already exists !",
-            Status:"Rewards already active, Disable rewards and add the rewards"
-        }
-    },
+    
 }
 
