@@ -16062,3 +16062,86 @@ TypeError: Cannot read property 'id' of undefined
   label: 'Meety APP',
   timestamp: '2021-07-07T05:20:25.651Z'
 }
+{
+  message: "PREPARING select * from meety_users where email_id='member40@gmail.com' and password='kqkidbsy'",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:20:35.590Z'
+}
+TextRow {
+  id: 33,
+  role_id: 4,
+  first_name: 'ja mamber',
+  phone_no: 1290121100,
+  email_id: 'member40@gmail.com',
+  password: 'kqkidbsy',
+  address: null,
+  city: null,
+  country: null,
+  network_connectivity: null,
+  zip_code: null,
+  parent_id: 32,
+  login_status: 'FIRST_TIME'
+}
+{
+  message: "PREPARING INSERT INTO meety_user_refresh_tokens (user_id,token,expires,createdByIp) VALUES (33,'44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d','2021-07-14 11:50:35.592','::ffff:127.0.0.1')",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:20:35.592Z'
+}
+{
+  message: "PREPARING INSERT INTO meety_user_refresh_tokens (user_id,token,expires,createdByIp) VALUES (33,'44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d','2021-07-14 11:50:35.592','::ffff:127.0.0.1')",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:20:35.592Z'
+}
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:20:35 +0000] "POST /meety-api/user/login HTTP/1.0" 200 715 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:20:35.596Z'
+}
+req.headers.access_token --->  {
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'content-length': '46',
+  'content-type': 'application/json',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': 'ff30cac7-4615-4aaf-8da7-3d00cad496ad',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk; refresh_token=44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d'
+}
+req.headers.refresh_token --->  undefined
+access_token --->  undefined
+refresh_token ----> undefined
+access_token not found...
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:21:02 +0000] "POST /meety-api/user/change_password HTTP/1.0" 401 12 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:21:02.520Z'
+}
+req.headers.access_token --->  {
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'content-length': '46',
+  'content-type': 'application/json',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': '58bc5db5-f7c6-48b5-a08f-12df25404c03',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk; refresh_token=44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d'
+}
+req.headers.refresh_token --->  undefined
+access_token --->  undefined
+refresh_token ----> undefined
+access_token not found...
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:22:41 +0000] "POST /meety-api/user/change_password HTTP/1.0" 401 12 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:22:41.490Z'
+}
