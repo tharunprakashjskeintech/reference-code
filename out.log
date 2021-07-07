@@ -16145,3 +16145,156 @@ access_token not found...
   label: 'Meety APP',
   timestamp: '2021-07-07T06:22:41.490Z'
 }
+database URL ...  demo.emeetify.com
+Listening on port 3555
+req.headers.access_token --->  {
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'content-length': '46',
+  'content-type': 'application/json',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': 'a4fe2503-12c0-4778-849e-deb676aae465',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk; refresh_token=44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d'
+}
+req.headers.access_token --->  undefined
+req.cookies.access_token --->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk
+req.headers.refresh_token --->  undefined
+req.cookies.refresh_toke --->  44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d
+{
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'content-length': '46',
+  'content-type': 'application/json',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': 'a4fe2503-12c0-4778-849e-deb676aae465',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk; refresh_token=44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d'
+}
+access_token --->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM4ODM1LCJleHAiOjE2MjU2Mzk0MzUsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.RW05QZDt8T95lc72YDKi_sMy0uvD8j5YZv0tWez6gWk
+refresh_token ----> 44d4c75c9920508d9559801c88dca98fbf4c92dc2d82326b20ff0a34452b69ab31b7fdb0839ec85d
+Unauthorized err... TokenExpiredError: jwt expired
+    at /var/www/html/Meety-api/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/html/Meety-api/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/html/Meety-api/node_modules/jsonwebtoken/verify.js:94:10)
+    at Auth (/var/www/html/Meety-api/utils/authenticate.js:45:32)
+    at Layer.handle [as handle_request] (/var/www/html/Meety-api/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/html/Meety-api/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/html/Meety-api/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/html/Meety-api/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/html/Meety-api/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/html/Meety-api/node_modules/express/lib/router/index.js:335:12) {
+  expiredAt: 2021-07-07T06:30:35.000Z
+}
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:31:04 +0000] "POST /meety-api/user/change_password HTTP/1.0" 200 141 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:31:04.115Z'
+}
+{
+  message: "PREPARING select * from meety_users where email_id='member40@gmail.com' and password='kqkidbsy'",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:31:52.729Z'
+}
+TextRow {
+  id: 33,
+  role_id: 4,
+  first_name: 'ja mamber',
+  phone_no: 1290121100,
+  email_id: 'member40@gmail.com',
+  password: 'kqkidbsy',
+  address: null,
+  city: null,
+  country: null,
+  network_connectivity: null,
+  zip_code: null,
+  parent_id: 32,
+  login_status: 'FIRST_TIME'
+}
+{
+  message: "PREPARING INSERT INTO meety_user_refresh_tokens (user_id,token,expires,createdByIp) VALUES (33,'dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365','2021-07-14 12:01:52.899','::ffff:127.0.0.1')",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:31:52.900Z'
+}
+{
+  message: "PREPARING INSERT INTO meety_user_refresh_tokens (user_id,token,expires,createdByIp) VALUES (33,'dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365','2021-07-14 12:01:52.899','::ffff:127.0.0.1')",
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:31:52.900Z'
+}
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:31:52 +0000] "POST /meety-api/user/login HTTP/1.0" 200 715 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:31:52.908Z'
+}
+req.headers.access_token --->  {
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': 'e8c93d5b-505c-44e4-9904-cc668acb14ec',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM5NTEyLCJleHAiOjE2MjU2NDAxMTIsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.kNDZhDT9DCKn1NRCaD1-Z0hLQmWOvp6FDSlsA2jEHZY; refresh_token=dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365'
+}
+req.headers.access_token --->  undefined
+req.cookies.access_token --->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM5NTEyLCJleHAiOjE2MjU2NDAxMTIsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.kNDZhDT9DCKn1NRCaD1-Z0hLQmWOvp6FDSlsA2jEHZY
+req.headers.refresh_token --->  undefined
+req.cookies.refresh_toke --->  dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365
+{
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': 'e8c93d5b-505c-44e4-9904-cc668acb14ec',
+  'accept-encoding': 'gzip, deflate, br',
+  cookie: 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM5NTEyLCJleHAiOjE2MjU2NDAxMTIsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.kNDZhDT9DCKn1NRCaD1-Z0hLQmWOvp6FDSlsA2jEHZY; refresh_token=dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365'
+}
+access_token --->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsInJvbGVfaWQiOjQsImVtYWlsX2lkIjoibWVtYmVyNDBAZ21haWwuY29tIiwiaWF0IjoxNjI1NjM5NTEyLCJleHAiOjE2MjU2NDAxMTIsImlzcyI6Imh0dHBzOi8vd3d3LnNrZWludGVjaC5jb20ifQ.kNDZhDT9DCKn1NRCaD1-Z0hLQmWOvp6FDSlsA2jEHZY
+refresh_token ----> dec82962a51ae2b323ffd82f72040a484e99a047ddad656aa9af88d4e486be465776393706818365
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:32:46 +0000] "GET /meety-api/user/token-check HTTP/1.0" 200 121 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:32:46.738Z'
+}
+req.headers.access_token --->  {
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': '95f42a19-d8bf-4b4c-9557-cf68e1a9e9ab',
+  'accept-encoding': 'gzip, deflate, br'
+}
+req.headers.access_token --->  undefined
+req.cookies.access_token --->  undefined
+req.headers.refresh_token --->  undefined
+req.cookies.refresh_toke --->  undefined
+{
+  host: 'demo.emeetify.com',
+  'x-real-ip': '157.49.64.100',
+  connection: 'close',
+  'user-agent': 'PostmanRuntime/7.28.1',
+  accept: '*/*',
+  'postman-token': '95f42a19-d8bf-4b4c-9557-cf68e1a9e9ab',
+  'accept-encoding': 'gzip, deflate, br'
+}
+access_token --->  null
+refresh_token ----> null
+access_token not found...
+{
+  message: '::ffff:127.0.0.1 - - [07/Jul/2021:06:33:30 +0000] "GET /meety-api/user/token-check HTTP/1.0" 401 12 "-" "PostmanRuntime/7.28.1"\n',
+  level: 'info',
+  label: 'Meety APP',
+  timestamp: '2021-07-07T06:33:30.932Z'
+}

@@ -14,13 +14,13 @@ function Auth(req, res, next) {
 
 
         try {
-<<<<<<< HEAD
+
             console.log("req.headers.access_token ---> ",req.headers);
             // console.log("req.cookies.access_token ---> ",req.cookies.access_token);
-=======
+
             console.log("req.headers.access_token ---> ",req.headers.access_token);
             console.log("req.cookies.access_token ---> ",req.cookies.access_token);
->>>>>>> d51256b1a01d2e2b48eae8228c76911c7d501ee2
+
 
             console.log("req.headers.refresh_token ---> ",req.headers.refresh_token);
             console.log("req.cookies.refresh_toke ---> ",req.cookies.refresh_token);
