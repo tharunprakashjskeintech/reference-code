@@ -14,7 +14,7 @@ function Auth(req, res, next) {
 
 
         try {
-            console.log("req.headers.access_token ---> ",req.headers.access_token);
+            console.log("req.headers.access_token ---> ",req.headers);
             // console.log("req.cookies.access_token ---> ",req.cookies.access_token);
 
             console.log("req.headers.refresh_token ---> ",req.headers.refresh_token);
