@@ -20,8 +20,9 @@ function Auth(req, res, next) {
             console.log("req.headers.refresh_token ---> ",req.headers.refresh_token);
             console.log("req.cookies.refresh_toke ---> ",req.cookies.refresh_token);
 
-            let access_token  =  req.headers.access_token || req.cookies.access_token;
-            let refresh_token = req.headers.refresh_token || req.cookies.refresh_token;
+            console.log(req.headers)
+            let access_token  =  req.headers.access_token || req.cookies.access_token || null;
+            let refresh_token = req.headers.refresh_token || req.cookies.refresh_token || null;
             // let access_token  =  req.headers.access_token;
             // let refresh_token = req.headers.refresh_token;
 console.log("access_token ---> ",access_token);
