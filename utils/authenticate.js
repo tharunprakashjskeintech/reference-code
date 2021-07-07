@@ -18,7 +18,8 @@ function Auth(req, res, next) {
             let access_token  =  req.headers.access_token || req.cookies.access_token;
             let refresh_token = req.headers.refresh_token || req.cookies.refresh_token;
 
-
+console.log("access_token ---> ",access_token);
+console.log("refresh_token ---->",refresh_token)
             if(!access_token) {
                 console.log("access_token not found...");
                 res.status(StatusCodes.UNAUTHORIZED).send('Unauthorized')
