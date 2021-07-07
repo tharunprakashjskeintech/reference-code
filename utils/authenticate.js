@@ -20,9 +20,12 @@ function Auth(req, res, next) {
 
 
             if(!access_token) {
+                console.log("access_token not found...");
                 res.status(StatusCodes.UNAUTHORIZED).send('Unauthorized')
             }
             else if(!refresh_token) {
+                console.log("refresh_token not found...");
+
                 res.status(StatusCodes.UNAUTHORIZED).send('Unauthorized')
             }
             else {
@@ -82,6 +85,7 @@ function Auth(req, res, next) {
           
         }
         catch (err) {
+            console.log("Unauthorized err...",err);
             res.send({
                 status: false,
                 message: "Unauthorized !",
