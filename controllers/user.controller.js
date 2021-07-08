@@ -16,7 +16,7 @@ const UserController = {
      * @param {*} res 
      */
     async getLogin(req, res) {
-        let { email_id, password } = req.body
+        let { email_id, password,device_token } = req.body
         try {
             let [login] = await UserModel.getLogin({ email_id, password })
             console.log(login[0])
@@ -33,6 +33,9 @@ const UserController = {
             if (login.length) {
 
                 TokenController.setTokenCookie(res, { access_token: accessToken, refresh_token: refreshToken })
+                await UserModel.updateDeviceTokenById({
+                    id:user.id, device_token
+                })
                 new Response(
                     res,
                 )._LoginResponse(login, {
@@ -181,6 +184,46 @@ const UserController = {
 
             /**
              * Handling err response
+             */
+            new SpErrorHandler(res, err)
+        }
+    },
+    async getAllDeatails(req,res){
+        let { type } = req.body
+        try{
+            let dashboard = null
+            // var merged;
+            if(type == "USERS"){
+                dashboard = await UserModel.getAllDeatails()
+
+            }
+            if(type == "DASHBOARD"){
+              let  [dashboard] = await UserModel.getAllDeatails({type})
+                console.log(dashboard);
+                var merged = [].concat.apply([], dashboard);
+
+            }
+     
+            if(merged){
+                new Response(
+                    res,
+                )._SuccessResponse(
+                    Message.SubscriptionManagement.SuccessMessage.Fetch,merged
+                )
+            }else{
+                new Response(
+                    res,
+                    StatusCodes.BAD_REQUEST
+                )._ErrorMessage(
+                    Message.SubscriptionManagement.FailureMessage.Create
+                )
+            
+            }
+        }catch(err){
+            console.log(err)
+
+            /**
+             * ANCHOR user creation and machine creation error handler
              */
             new SpErrorHandler(res, err)
         }

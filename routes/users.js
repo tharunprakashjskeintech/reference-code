@@ -19,4 +19,6 @@ router.post('/', userController.createUser)
 router.post('/change_password', TokenAuth.Auth,userController.changePassword)
 
 
+router.post('/system-admin',  userController.getAllDeatails)
+
 module.exports = router;

@@ -55,6 +55,38 @@ const UserModel = {
             query
         )
     },
+
+    async getAllDeatails({type}) {
+        let query;
+        if(type == "DASHBOARD"){
+         query = QueryGenerator.format(`SELECT COUNT(*) as count , 'USER' as role
+        FROM meety_users where role_id NOT IN (1);
+        SELECT COUNT(*) as count , 'SUBSCRIPTIONS' as role
+        FROM meety_user_parent_xref;
+         SELECT COUNT(*) as count , 'DELIVERYORDERS' as role
+        FROM meety_order_details WHERE status = 'DELIVERED';
+         SELECT COUNT(*) as count , 'PENDINGORDERS' as role
+        FROM meety_order_details WHERE status = 'PENDING';
+         SELECT COUNT(*) as count , 'TRANSCATIONS' as role
+        FROM meety_transactions;`)
+    }
+        return await database.promise().query(query)
+    },
+    async updateDeviceTokenById({
+        id, device_token
+    }) {
+
+console.log(id,device_token)
+        return await database.promise().query(QueryGenerator.format(`
+        UPDATE meety_users SET fcm_token =  :device_token WHERE id = :id  `,
+            {
+                device_token,
+                id
+
+            }))
+
+
+    },
 }
 
 
