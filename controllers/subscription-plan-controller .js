@@ -38,7 +38,118 @@ const subscriptionController = {
             new SpErrorHandler(res, err)
         }
     },
+async addOrder(req,res){
+    let { user_id,payment_type,total_amount,trx_id,status,subscription_id,date} = req.body;
+    try{
+        let [subscription] = await SubscriptionModel.addOrder({user_id,payment_type,total_amount,trx_id,status,subscription_id,date})
+        if(subscription){
+            new Response(
+                res,
+            )._SuccessResponse(
+                Message.OrderManagement.SuccessMessage.Create
+            )
+        }else{
+            new Response(
+                res,
+                StatusCodes.BAD_REQUEST
+            )._ErrorMessage(
+                Message.OrderManagement.FailureMessage.Create
+            )
+        
+        }
+    }catch(err){
+        console.log(err)
 
+        /**
+         * ANCHOR user creation and machine creation error handler
+         */
+        new SpErrorHandler(res, err)
+    }
+},
+async addTransaction(req,res){
+    let {user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date} = req.body;
+    try{
+        let [subscription] = await SubscriptionModel.addTransaction({user_id,payment_type,total_amount,trx_id,status,subscription_id,dateuser_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date})
+        if(subscription){
+            new Response(
+                res,
+            )._SuccessResponse(
+                Message.TransactionManagement.SuccessMessage.Create
+            )
+        }else{
+            new Response(
+                res,
+                StatusCodes.BAD_REQUEST
+            )._ErrorMessage(
+                Message.TransactionManagement.FailureMessage.Create
+            )
+        
+        }
+    }catch(err){
+        console.log(err)
+
+        /**
+         * ANCHOR user creation and machine creation error handler
+         */
+        new SpErrorHandler(res, err)
+    }
+},
+async getOrder(req,res){
+    try{
+        let [getsubscription] = await SubscriptionModel.getOrder()
+        if(getsubscription){
+            new Response(
+                res,
+            )._SuccessResponse(
+                Message.OrderManagement.SuccessMessage.Fetch,
+                getsubscription
+            )
+        }else{
+            new Response(
+                res,
+                StatusCodes.BAD_REQUEST
+            )._ErrorMessage(
+                Message.OrderManagement.FailureMessage.Create
+            )
+        
+        }
+    }catch(err){
+        console.log(err)
+
+        /**
+         * ANCHOR user creation and machine creation error handler
+         */
+        new SpErrorHandler(res, err)
+    }
+},
+async getTransaction(req,res){
+    try{
+        let [getsubscription] = await SubscriptionModel.getTransaction()
+        if(getsubscription){
+            new Response(
+                res,
+            )._SuccessResponse(
+                Message.TransactionManagement.SuccessMessage.Fetch,
+                getsubscription
+            )
+        }else{
+            new Response(
+                res,
+                StatusCodes.BAD_REQUEST
+            )._ErrorMessage(
+                Message.TransactionManagement.FailureMessage.Create
+            )
+        
+        }
+    }catch(err){
+        console.log(err)
+
+        /**
+         * ANCHOR user creation and machine creation error handler
+         */
+        new SpErrorHandler(res, err)
+    }
+},
     async getSubscriptionPlan(req,res){
         try{
             let [getsubscription] = await SubscriptionModel.getSubscriptionPlan()
@@ -46,7 +157,8 @@ const subscriptionController = {
                 new Response(
                     res,
                 )._SuccessResponse(
-                    Message.SubscriptionManagement.SuccessMessage.Fetch
+                    Message.SubscriptionManagement.SuccessMessage.Fetch,
+                    getsubscription
                 )
             }else{
                 new Response(
@@ -103,7 +215,38 @@ const subscriptionController = {
                 new Response(
                     res,
                 )._SuccessResponse(
-                    Message.SubscriptionManagement.SuccessMessage.Fetch
+                    Message.SubscriptionManagement.SuccessMessage.Fetch,
+                    getsubscription
+                )
+            }else{
+                new Response(
+                    res,
+                    StatusCodes.BAD_REQUEST
+                )._ErrorMessage(
+                    Message.SubscriptionManagement.FailureMessage.Create
+                )
+            
+            }
+        }catch(err){
+            console.log(err)
+
+            /**
+             * ANCHOR user creation and machine creation error handler
+             */
+            new SpErrorHandler(res, err)
+        }
+    },
+    async addSubscripiontoUser(req,res){
+        console.log(req)
+        let { tablet_id, subscription_id,internet_plan_id } = req.body;
+        // let {id}=req.user;
+        try{
+            let [subscription] = await SubscriptionModel.addSubscripiontoUser({tablet_id, subscription_id,internet_plan_id})
+            if(subscription){
+                new Response(
+                    res,
+                )._SuccessResponse(
+                    Message.SubscriptionManagement.SuccessMessage.Create
                 )
             }else{
                 new Response(

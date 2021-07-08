@@ -69,6 +69,7 @@ const UserModel = {
         FROM meety_order_details WHERE status = 'PENDING';
          SELECT COUNT(*) as count , 'TRANSCATIONS' as role
         FROM meety_transactions;`)
+        
     }
         return await database.promise().query(query)
     },
