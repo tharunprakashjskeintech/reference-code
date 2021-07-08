@@ -16,7 +16,7 @@ router.get('/token-check', TokenAuth.Auth, (req, res, next) => {
 router.post('/refresh-access-token',TokenController.refreshAccessToken)
 
 router.post('/', userController.createUser)
-router.post('/change_password', userController.changePassword)
+router.post('/change_password', TokenAuth.Auth,userController.changePassword)
 
 //Get Tablet users
 router.get('/getTabletUsers', userController.getTabletUsers)

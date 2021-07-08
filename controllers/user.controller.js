@@ -153,6 +153,10 @@ const UserController = {
              * ANCHOR creating user ref to gym
              * 
              */
+
+            console.log("--- req.user--", req.user);
+
+            //  let { id } = req.user
             let [changepassword] = await UserModel.changePasswordById({
                 id,
                 password

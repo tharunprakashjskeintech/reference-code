@@ -9,11 +9,14 @@ var router = express.Router();
 var userRouter = require('./users');
 
 var subscriptionRouter = require('./subscription-plan.route');
-
+ var dashboardRouter = require('./dashboard.route')
 // creating a unique route for users
 router.use('/user', userRouter)
 
 // creating a unique route for subscription
 router.use('/subscription', subscriptionRouter)
+
+// creating a unique route for users
+router.use('/dashboard', dashboardRouter)
 
 module.exports = router

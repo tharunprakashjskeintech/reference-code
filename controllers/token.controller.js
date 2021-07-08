@@ -125,7 +125,7 @@ const TokenController = {
             else {
                 res.send({
                     status: false,
-                    message: "Something 3"
+                    message: "Unauthorized token"
                 })
             }
         }
@@ -133,7 +133,7 @@ const TokenController = {
             console.log(err)
             res.send({
                 status: false,
-                message: "Something 2"
+                message: "Unauthorized token"
             })
         }
     }
