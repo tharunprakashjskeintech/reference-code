@@ -11,7 +11,7 @@ router.post('/login', userController.getLogin)
 router.get('/token-check', TokenAuth.Auth, (req, res, next) => {
     res.send(req.user)
 })
-
+router.get('', userController.fetch)
 
 router.post('/refresh-access-token',TokenController.refreshAccessToken)
 

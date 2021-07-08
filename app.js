@@ -25,7 +25,7 @@ app.use('/meety-api', indexRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
+require('./utils/socket');
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development

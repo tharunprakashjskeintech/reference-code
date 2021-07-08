@@ -186,7 +186,35 @@ const UserController = {
             new SpErrorHandler(res, err)
         }
     },
+    async fetch(req,res){
+        try{
+            let{ id } =req.query;
+            let [contactUsers] = await UserModel.getUser(id);
+            if(contactUsers){
+                new Response(
+                    res,
+                )._SuccessResponse(
+                    Message.UserManagement.SuccessMessage.Fetch,
+                    contactUsers
+                )
+            }else{
+                new Response(
+                    res,
+                    StatusCodes.BAD_REQUEST
+                )._ErrorMessage(
+                    Message.UserManagement.FailureMessage.NotFound
+                )
+            
+            }
+        }catch(err){
+            console.log(err)
 
+            /**
+             * ANCHOR user creation and machine creation error handler
+             */
+            new SpErrorHandler(res, err)
+        }
+    },
     async getTabletUsers(req,res){
         try{
             let [tabletUsers] = await UserModel.getTabletUsers();
@@ -194,7 +222,7 @@ const UserController = {
                 new Response(
                     res,
                 )._SuccessResponse(
-                    Message.SubscriptionManagement.SuccessMessage.Fetch,
+                    Message.UserManagement.SuccessMessage.Fetch,
                     tabletUsers
                 )
             }else{
@@ -202,7 +230,7 @@ const UserController = {
                     res,
                     StatusCodes.BAD_REQUEST
                 )._ErrorMessage(
-                    Message.SubscriptionManagement.FailureMessage.NotFound
+                    Message.UserManagement.FailureMessage.NotFound
                 )
             
             }
@@ -223,7 +251,7 @@ const UserController = {
                 new Response(
                     res,
                 )._SuccessResponse(
-                    Message.SubscriptionManagement.SuccessMessage.Fetch,
+                    Message.UserManagement.SuccessMessage.Fetch,
                     contactUsers
                 )
             }else{
@@ -231,7 +259,7 @@ const UserController = {
                     res,
                     StatusCodes.BAD_REQUEST
                 )._ErrorMessage(
-                    Message.SubscriptionManagement.FailureMessage.NotFound
+                    Message.UserManagement.FailureMessage.NotFound
                 )
             
             }
@@ -380,7 +408,7 @@ const UserController = {
             }
         }
         catch (err) {
-            new AppErrorHandler(res, err)
+            new SpErrorHandler(res, err)
         }
     },
 }

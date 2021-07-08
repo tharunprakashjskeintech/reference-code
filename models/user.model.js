@@ -26,7 +26,14 @@ const UserModel = {
         return await database.promise().query(query)
 
     },
-
+    async getUser(id){
+        let query;
+        // Query generator can generate a insert query based on object we passed
+        query = QueryGenerator.format(`select * 
+        from meety_users
+        where meety_users.id=${id}`)
+        return await database.promise().query(query)
+    },
     // async createUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code,
     //     }) {
 
@@ -97,7 +104,7 @@ const UserModel = {
 
     let query = QueryGenerator.update('meety_users', user, { id: id })
 
-    return await database.connection.promise().query(query)
+    return await database.promise().query(query)
 
   },
 }
