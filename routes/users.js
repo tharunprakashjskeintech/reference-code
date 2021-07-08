@@ -18,5 +18,16 @@ router.post('/refresh-access-token',TokenController.refreshAccessToken)
 router.post('/', userController.createUser)
 router.post('/change_password', userController.changePassword)
 
+//Get Tablet users
+router.get('/getTabletUsers', userController.getTabletUsers)
+
+// Contact users
+router.get('/getContactUsers', userController.getContactUsers)
+
+router.post('/addContactUsers', userController.addContactUsers)
+
+router.delete('/:id', userController.delete)
+
+router.put('/:id', userController.update)
 
 module.exports = router;

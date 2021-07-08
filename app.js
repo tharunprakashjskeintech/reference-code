@@ -5,20 +5,21 @@ var cookieParser = require('cookie-parser');
 var indexRouter = require('./routes/index.route');
 
 var app = express();
-
+var cors = require('cors')
 var morgan = require('morgan')
 var winston = require('./utils/winston');
 
 
 app.use(morgan('combined', { stream: winston.stream }));
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/meety-api', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

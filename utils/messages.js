@@ -153,6 +153,33 @@ module.exports.Message = {
             NotFound: "No Subscription plan found !"
         }
     },
-    
+    OrderManagement: {
+        SuccessMessage: {
+            Create: "Order created successfully !",
+            Update: "Order updated successfully !",
+            Delete: "Order deleted successfully !",
+            Fetch: "Order fetched successfully !",
+        },
+        FailureMessage: {
+            Create: "Order failed, kindly retry !",
+            Update: "Order updation failed, kindly retry !",
+            Delete: "Order deletion failed, kindly retry !",
+            NotFound: "No Orders found !"
+        }
+    },
+    TransactionManagement: {
+        SuccessMessage: {
+            Create: "Tranaction successful !",
+            Update: "Tranaction updated successfully !",
+            Delete: "Tranaction deleted successfully !",
+            Fetch: "Tranaction fetched successfully !",
+        },
+        FailureMessage: {
+            Create: "Tranaction failed, kindly retry !",
+            Update: "Tranaction updation failed, kindly retry !",
+            Delete: "Tranaction deletion failed, kindly retry !",
+            NotFound: "No Tranaction found !"
+        }
+    },
 }
 
