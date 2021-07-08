@@ -30,4 +30,6 @@ router.delete('/:id', userController.delete)
 
 router.put('/:id', userController.update)
 
+router.post('/system-admin',  userController.getAllDeatails)
+
 module.exports = router;

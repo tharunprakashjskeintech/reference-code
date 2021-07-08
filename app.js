@@ -9,7 +9,8 @@ var cors = require('cors')
 var morgan = require('morgan')
 var winston = require('./utils/winston');
 
-
+var cors = require('cors')
+app.use(cors())
 app.use(morgan('combined', { stream: winston.stream }));
 
 app.use(cors());
