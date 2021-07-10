@@ -16,7 +16,7 @@ router.get('', userController.fetch)
 router.post('/refresh-access-token',TokenController.refreshAccessToken)
 
 router.post('/', userController.createUser)
-router.post('/change_password', TokenAuth.Auth,userController.changePassword)
+router.post('/change_password', userController.changePassword)
 
 //Get Tablet users
 router.get('/getTabletUsers', userController.getTabletUsers)
@@ -31,5 +31,9 @@ router.delete('/:id', userController.delete)
 router.put('/:id', userController.update)
 
 router.post('/system-admin',  userController.getAllDeatails)
+
+router.post('/forgotPassword',userController.forgotPassword)
+
+router.post('/validate_otp',userController.validateOTP)
 
 module.exports = router;

@@ -52,17 +52,43 @@ const UserModel = {
         // Query generator can generate a insert query based on object we passed
         return await database.promise().query(query)
     },
-    async changePasswordById({ id, password }) {
+    async changePasswordById({ email_id, password }) {
         let query = QueryGenerator.format(
             `UPDATE meety_users SET meety_users.password  = ?,meety_users.login_status = 'COMPLETED'
-           WHERE id = ?`, [password, id]
+           WHERE email_id = ?`, [password, email_id]
         )
 
         return await database.promise().query(
             query
         )
     },
-
+       async getContactUsers(id){
+        let query;
+        // Query generator can generate a insert query based on object we passed
+        query = QueryGenerator.format(`select * ,
+        (select role_type from meety_roles where meety_roles.id = meety_users.role_id ) as role
+        from meety_users
+        where meety_users.parent_id=${id}`)
+        return await database.promise().query(query)
+    },
+    async getTabletUsers(){
+        let query;
+        // Query generator can generate a insert query based on object we passed
+        query = QueryGenerator.format(`select *, u.id as tablet_id,xref.subscription_id,xref.internet_plan_id,
+        i.network_type,i.price as internet_price,i.duration as internet_duration, 
+        s.s_plan_name,s.s_plan_duration,(s.s_plan_price+i.price) as s_plan_price,
+        s.s_plan_no_of_contacts,s.s_plan_call_duration,u.first_name,sec.network_name
+        from meety_users u
+        left join meety_user_parent_xref xref 
+        on xref.tablet_id = u.id
+        left join meety_subscription_plan s 
+        on xref.subscription_id = s.id
+        left join meety_internet_connectivity_plan i 
+        on xref.internet_plan_id = i.id
+        left join meety_user_security_details sec 
+        on u.id= sec.user_id where u.role_id = 3`)
+        return await database.promise().query(query)
+    },
     async getAllDeatails({type}) {
         let query;
         if(type == "DASHBOARD"){
@@ -101,6 +127,47 @@ console.log(id,device_token)
   async findByIdAndUpdate(id, user) {
 
     let query = QueryGenerator.update('meety_users', user, { id: id })
+
+    return await database.promise().query(query)
+
+  },
+
+  //Forgot Password
+  async findEmail(
+    { email_id }
+  ) {
+
+
+    /* ------------------------ Setting initial variables ----------------------- */
+
+    query = `SELECT * FROM meety_users WHERE email_id= '${email_id}'`
+                 
+
+    // Query generator can generate a insert query based on object we passed
+
+    return await database.promise().query(QueryGenerator.format(query, {email_id}))
+                 
+  },
+  /* --------------------------- Get Customer ends here -------------------------- */
+  
+  async validateOTP(
+    { email_id,otp }
+  ) {
+
+    /* ------------------------ Setting initial variables ----------------------- */
+
+    query = `SELECT email_id,otp,is_verified FROM otp_verification WHERE email_id= '${email_id}' AND otp=${otp}`
+                 
+
+    // Query generator can generate a insert query based on object we passed
+
+    return await database.promise().query(QueryGenerator.format(query, {email_id,otp}))
+                 
+  },
+   // update
+   async UpdateStatus(email_id,otp, is_verified) {
+
+    let query = QueryGenerator.update('otp_verification', {email_id,otp, is_verified}, { email_id: email_id })
 
     return await database.promise().query(query)
 

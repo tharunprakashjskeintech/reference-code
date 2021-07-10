@@ -9,6 +9,7 @@ const uniqid = require('uniqid')
 const { StatusCodes } = require("http-status-codes");
 const TokenController = require('./token.controller');
 const moment = require('moment')
+const mailer = require("../utils/mailler")
 const UserController = {
     /**
      * 
@@ -149,7 +150,7 @@ const UserController = {
         try {
 
             let {
-                id,
+                email_id,
                 password
             } = req.body
             /**
@@ -161,7 +162,7 @@ const UserController = {
 
             //  let { id } = req.user
             let [changepassword] = await UserModel.changePasswordById({
-                id,
+                email_id,
                 password
             })
             console.log("change password === > ", changepassword);
@@ -449,6 +450,74 @@ const UserController = {
             else {
                 // failed response
                 new Response(res, StatusCodes.OK)._ErrorMessage(Message.Common.FailureMessage.Updation("User"),userdetails)
+
+            }
+        }
+        catch (err) {
+            new SpErrorHandler(res, err)
+        }
+    },
+      //Forgot Password
+      async forgotPassword(req, res) {
+
+        // getting request from body
+        let { email_id } = req.body;
+        
+        try {
+           let [userdetails] = await UserModel.findEmail({
+                    email_id
+                })
+               
+     
+            if(userdetails.length) {
+                console.log("users ===>",userdetails);
+                mailer.sendMail({"email_id":email_id,"OTP":'Y'});
+                // console.log(isSent);
+                // if(isSent){
+                    
+                    // sending success response to client
+                    new Response(res)._SuccessResponse(Message.Common.SuccessMessage.EmailSent)
+                    
+                // }else{
+                //     new Response(res, StatusCodes.OK)._ErrorMessage(Message.Common.FailureMessage.EmailSent) 
+                // }
+               
+            }
+            else {
+                // failed response
+                new Response(res, StatusCodes.OK)._ErrorMessage("Entered Email id is not registered, Please try again!")
+
+            }
+        }
+        catch (err) {
+            new SpErrorHandler(res, err)
+        }
+    },
+    async validateOTP(req,res){
+
+        // getting request from body
+        let { email_id,otp } = req.body;
+        // let { user_id } = req.params;
+        console.log(req.body);
+        try {
+           let [validateOTP] = await UserModel.validateOTP({
+                    email_id,otp
+                })
+               
+                 console.log("users ===>",validateOTP);
+            if(validateOTP.length){
+                
+                let isVerified=1;
+                 await UserModel.UpdateStatus(
+                    email_id,otp,isVerified
+                )
+                    new Response(res, StatusCodes.OK)._SuccessResponse("Success") 
+                
+               
+            }
+            else {
+                // failed response
+                new Response(res, StatusCodes.OK)._ErrorMessage("Invalid OTP")
 
             }
         }

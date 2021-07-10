@@ -1,9 +1,8 @@
 
 // 'use strict';
 const nodemailer = require('nodemailer');
-const generator = require('generate-password');
 const QueryGenerator = require("../generators/query.generator")
-const database = require("../utils/database");
+const database = require("./database");
 const logger = require('./winston');
 const UserModel = require("../models/user.model");
 
@@ -12,13 +11,13 @@ const UserModel = require("../models/user.model");
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: '',
-            pass: ''
+            user: 'skeintechtest@gmail.com',
+            pass: 'skein@123'
         }
     });
-
+    var newPwd=generatePassword();
     var mailOptions = {
-        from: '', // sender address
+        from: 'skeintechtest@gmail.com', // sender address
         to: userMail, // list of receivers
         subject: 'Reset Password', // Subject line
         html: 'Your Otp is:' + newPwd // plain text body
@@ -30,12 +29,23 @@ const UserModel = require("../models/user.model");
                     console.error("Error:**send email**", err);
                 else
 
-
-                    callback(null, info);
+                var user= {email_id:userMail,otp:newPwd,is_verified:0};
+                // query = QueryGenerator.insert(`otp_verification`,{email_id:userMail,otp:newPwd,isVerified:0})
+                // return  await database.promise().query(query)
+                return database.promise().query(QueryGenerator.insert("otp_verification", user))
+                    // callback(null, info);
             });
 
 };
-
+function generatePassword() {
+    var length = 5,
+        charset = "0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+}
 
 
 

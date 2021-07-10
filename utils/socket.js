@@ -37,12 +37,12 @@ io.use(function (socket, next) {
 
 io.on('connect', function (socket) {
     console.log("Connected");
-var getMessages = async function (user_id) {
+var getMessages = async function (id) {
 
     
     
    let  [messageList] = await ChatModel.getMessages({
-    user_id
+    id
     })
 
 // if (document.insertId) {
@@ -59,13 +59,13 @@ var getMessages = async function (user_id) {
         let{messages,admin_read,status} =data;
        
         let [messageList] = await ChatModel.createMessage({
-            user_id,messages,admin_read,status
+            id,messages,admin_read,status
             
         })
  
         
 
-        getMessages( user_id);
+        getMessages(id);
        
     })
     
