@@ -10,6 +10,7 @@ var userRouter = require('./users');
 
 var subscriptionRouter = require('./subscription-plan.route');
  var dashboardRouter = require('./dashboard.route')
+ var LocationRouter = require('./location.route')
 // creating a unique route for users
 router.use('/user', userRouter)
 
@@ -19,4 +20,5 @@ router.use('/subscription', subscriptionRouter)
 // creating a unique route for users
 router.use('/dashboard', dashboardRouter)
 
+router.use('/location', LocationRouter)
 module.exports = router

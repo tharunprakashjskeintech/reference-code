@@ -11,15 +11,15 @@ const UserModel = {
 
     },
 
-    async createUserProfile({role_id,email_id, phone_no, first_name,address,city,country,network_type,zip_code,
+    async createUserProfile({role_id,email_id, phone_no, first_name,profile_pic,address,city,country,network_type,zip_code,
         network_name,security_type,security_password,router_picture,delivery_address,parent_id}) {
         let query;
         // Query generator can generate a insert query based on object we passed
         if(role_id == 2){
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,address,city,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
 
         }else{
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,address,city,country,zip_code,parent_id,password:uniqid.time()});
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,country,zip_code,parent_id,password:uniqid.time()});
             query += `;${QueryGenerator.insert(`meety_user_security_details`, { user_id: QueryGenerator.LAST_INSERTID, network_name,security_type,security_password,router_picture,delivery_address })}`
       
         }

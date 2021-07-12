@@ -20,6 +20,8 @@ const UserController = {
         let { email_id, password,device_token } = req.body
         try {
             let [login] = await UserModel.getLogin({ email_id, password })
+            console.log(login)
+            if(login.length != 0){ 
             console.log(login[0])
             let user = {
                 id: login[0].id,
@@ -47,12 +49,20 @@ const UserController = {
             } else {
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.UserManagement.FailureMessage.Login,
                 )
 
             }
+        }else{
+            new Response(
+                res,
+                StatusCodes.OK
+            )._ErrorMessage(
+                Message.UserManagement.FailureMessage.Login,
+            )
+        }
         } catch (err) {
             console.log(err)
 
@@ -70,11 +80,11 @@ const UserController = {
      */
     async createUser(req, res) {
 
-        let { role_id, email_id, phone_no, first_name,last_name, address, city, country, network_type, zip_code, network_name, security_type, security_password, router_picture, contacts, parent_id, delivery_address } = req.body
+        let { role_id, email_id, phone_no, first_name,last_name,profile_pic, address, phone_code,state,city, country, network_type, zip_code, network_name, security_type, security_password, router_picture, contacts, parent_id, delivery_address } = req.body
         try {
             if (Role.ADMIN_USER == role_id) {
                 let [profile_data] = await UserModel.createUserProfile({
-                    role_id, email_id, phone_no, first_name,last_name, address, city, country, network_type, zip_code
+                    role_id, email_id, phone_no, first_name,last_name,profile_pic, address,phone_code,state, city, country, network_type, zip_code
                 })
                 profile_data = profile_data instanceof Array ? profile_data[0] : profile_data
 
@@ -89,7 +99,7 @@ const UserController = {
                 } else {
                     new Response(
                         res,
-                        StatusCodes.BAD_REQUEST
+                        StatusCodes.OK
                     )._ErrorMessage(
                         Message.UserManagement.FailureMessage.Create,
                     )
@@ -98,7 +108,7 @@ const UserController = {
 
             } else if (Role.TABLET_USER == role_id) {
                 let [profile_data] = await UserModel.createUserProfile({
-                    role_id, email_id, phone_no, first_name,last_name, address, city, country, network_type, zip_code, network_name, security_type, security_password, router_picture, delivery_address, parent_id
+                    role_id, email_id, phone_no, first_name,last_name,profile_pic, address,phone_code,state, city, country, network_type, zip_code, network_name, security_type, security_password, router_picture, delivery_address, parent_id
                 })
                 profile_data = profile_data instanceof Array ? profile_data[0] : profile_data
                 if (contacts) {
@@ -126,7 +136,7 @@ const UserController = {
                 } else {
                     new Response(
                         res,
-                        StatusCodes.BAD_REQUEST
+                        StatusCodes.OK
                     )._ErrorMessage(
                         Message.UserManagement.FailureMessage.Create,
                     )
@@ -158,7 +168,7 @@ const UserController = {
              * 
              */
 
-            console.log("--- req.user--", req.user);
+            // console.log("--- req.user--", req.user);
 
             //  let { id } = req.user
             let [changepassword] = await UserModel.changePasswordById({
@@ -215,7 +225,7 @@ const UserController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )
@@ -246,7 +256,7 @@ const UserController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.UserManagement.FailureMessage.NotFound
                 )
@@ -274,7 +284,7 @@ const UserController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.UserManagement.FailureMessage.NotFound
                 )
@@ -303,7 +313,7 @@ const UserController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.UserManagement.FailureMessage.NotFound
                 )
@@ -321,12 +331,13 @@ const UserController = {
     async addContactUsers(req,res){
         try{
             // let{ id } =req.query;
-            let {id,first_name, last_name,phone_no,email_id} = req.body;
+            let {id,first_name, last_name,phone_no,email_id,profile_pic} = req.body;
             membersdata= {
                 first_name: first_name,
                 last_name:last_name,
                 phone_no: phone_no,
                 email_id: email_id,
+                profile_pic:profile_pic,
                 password: uniqid.time(),
                 parent_id: id,
                 role_id: 4
@@ -341,7 +352,7 @@ const UserController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.UserManagement.FailureMessage.Create,
                 )
@@ -402,7 +413,7 @@ const UserController = {
      async update(req, res) {
 
         // getting request from body
-        let {role_id, email_id, phone_no, first_name,last_name, address, city, country, network_type, zip_code, network_name,
+        let {role_id, email_id, phone_no, first_name,last_name, profile_pic,address,phone_code,state, city, country, network_type, zip_code, network_name,
              security_type, security_password, router_picture, contacts, parent_id, delivery_address,auto_answer,auto_answer_time} = req.body;
         let { id } = req.params;
         console.log(req.body);
@@ -433,7 +444,7 @@ const UserController = {
             // }
 
             let [userdetails] = await UserModel.findByIdAndUpdate(id,{
-                role_id, email_id, phone_no, first_name,last_name, address, city, country,
+                role_id, email_id, phone_no, first_name,last_name,profile_pic,phone_code,state, address, city, country,
                  network_type, zip_code, network_name, security_type, security_password, router_picture, contacts, parent_id, delivery_address,auto_answer,auto_answer_time}
             )
 
@@ -525,5 +536,6 @@ const UserController = {
             new SpErrorHandler(res, err)
         }
     },
+   
 }
 module.exports = UserController
