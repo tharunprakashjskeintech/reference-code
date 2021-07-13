@@ -11,15 +11,24 @@ const UserModel = {
 
     },
 
-    async createUserProfile({role_id,email_id, phone_no, first_name,profile_pic,address,city,country,network_type,zip_code,
+    async findEmail({email_id}){
+        query = `SELECT * FROM meety_users WHERE email_id= '${email_id}'`
+                
+
+   // Query generator can generate a insert query based on object we passed
+
+   return await database.promise().query(QueryGenerator.format(query, {email_id}))
+            
+    },
+    async createUserProfile({role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_code,country,network_type,zip_code,
         network_name,security_type,security_password,router_picture,delivery_address,parent_id}) {
         let query;
         // Query generator can generate a insert query based on object we passed
         if(role_id == 2){
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_code,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
 
         }else{
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,country,zip_code,parent_id,password:uniqid.time()});
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_codecountry,zip_code,parent_id,password:uniqid.time()});
             query += `;${QueryGenerator.insert(`meety_user_security_details`, { user_id: QueryGenerator.LAST_INSERTID, network_name,security_type,security_password,router_picture,delivery_address })}`
       
         }
@@ -172,6 +181,14 @@ console.log(id,device_token)
     return await database.promise().query(query)
 
   },
+    // delete
+    async findByIdAndDelete(id) {
+
+        let query = QueryGenerator.format(`DELETE FROM meety_users where id =? `, [id])
+    
+        return await database.promise().query(query)
+    
+      },
 }
 
 

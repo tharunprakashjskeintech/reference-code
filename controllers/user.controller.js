@@ -19,10 +19,14 @@ const UserController = {
     async getLogin(req, res) {
         let { email_id, password,device_token } = req.body
         try {
+            let [userExist]=await UserModel.findEmail({
+                email_id
+            });
+            if (userExist.length) {
             let [login] = await UserModel.getLogin({ email_id, password })
-            console.log(login)
+           
             if(login.length != 0){ 
-            console.log(login[0])
+            
             let user = {
                 id: login[0].id,
                 role_id: login[0].role_id,
@@ -60,9 +64,17 @@ const UserController = {
                 res,
                 StatusCodes.OK
             )._ErrorMessage(
-                Message.UserManagement.FailureMessage.Login,
+               "Wrong Password, Please try again or click forget password to reset !"
             )
         }
+    }else{
+        new Response(
+            res,
+            StatusCodes.OK
+        )._ErrorMessage(
+            "Entered Email ID is not registered, Please try again!"
+        )
+    }
         } catch (err) {
             console.log(err)
 
