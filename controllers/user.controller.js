@@ -215,19 +215,15 @@ const UserController = {
     async getAllDeatails(req,res){
         let { type } = req.body
         try{
-            let dashboard = null
-            // var merged;
-            if(type == "USERS"){
-                dashboard = await UserModel.getAllDeatails()
-
-            }
             if(type == "DASHBOARD"){
-              let  [dashboard] = await UserModel.getAllDeatails({type})
-                console.log(dashboard);
+                let [dashboard] = await UserModel.getAllDeatails({type})
                 var merged = [].concat.apply([], dashboard);
-
+            }else{
+                let [dashboard] = await UserModel.getAllDeatails({type})
+              var merged = dashboard;
             }
-     
+              
+
             if(merged){
                 new Response(
                     res,
@@ -252,6 +248,7 @@ const UserController = {
             new SpErrorHandler(res, err)
         }
     },
+
 
      
     async fetch(req,res){

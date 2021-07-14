@@ -113,6 +113,23 @@ const UserModel = {
         FROM meety_transactions;`)
         
     }
+    else if(type == "USERS"){
+    
+        query = QueryGenerator.format(`SELECT *
+        FROM meety_users where role_id = 2 `)
+
+     }else if(type == "ORDERS"){
+        query = QueryGenerator.format(`SELECT meety_order_details.*,usr.first_name,plan.s_plan_name,plan.s_plan_duration,plan.s_plan_price,plan.s_plan_no_of_contacts,plan.s_plan_call_duration
+        FROM meety_order_details
+ join meety_users as usr on usr.id = meety_order_details.user_id
+join meety_subscription_plan as plan on plan.id= meety_order_details.subscription_id`)
+     }else if(type == "TRANSCATIONS"){
+        query = QueryGenerator.format(`SELECT *
+        FROM meety_transactions `)
+     }else if(type == "SUBSCRIPTIONS"){
+        query = QueryGenerator.format(`SELECT *
+        FROM meety_subscription_plan `)
+     }
         return await database.promise().query(query)
     },
     async updateDeviceTokenById({

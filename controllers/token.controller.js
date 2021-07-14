@@ -101,7 +101,7 @@ const TokenController = {
 
     },
     options: {
-        expiresIn: "30d", issuer: "https://www.skeintech.com"
+        expiresIn: "10m", issuer: "https://www.skeintech.com"
     },
     async refreshAccessToken(req, res, next) {
         try {
