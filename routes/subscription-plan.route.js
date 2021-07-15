@@ -12,11 +12,11 @@ router.post('/create-internet-plan', subscriptionController.createInternetPlan)
 
 router.get('/get-internet-plan', subscriptionController.getInternetPlan)
 
-router.post('/add-subscription-plan',  TokenAuth.Auth, subscriptionController.addSubscripiontoUser)
+router.post('/add-subscription-plan', subscriptionController.addSubscripiontoUser)
 
-router.post('/add-order',  TokenAuth.Auth, subscriptionController.addOrder)
+router.post('/add-order',   subscriptionController.addOrder)
 
-router.post('/add-transaction',  TokenAuth.Auth, subscriptionController.addTransaction)
+router.post('/add-transaction',subscriptionController.addTransaction)
 
 router.get('/get-order', subscriptionController.getOrder)
 

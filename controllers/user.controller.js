@@ -72,7 +72,7 @@ const UserController = {
             res,
             StatusCodes.OK
         )._ErrorMessage(
-            "Entered Email ID is not registered, Please try again!"
+            "Entered User not Registered please register now!"
         )
     }
         } catch (err) {
@@ -129,6 +129,7 @@ const UserController = {
                             first_name: item.first_name,
                             last_name:item.last_name,
                             phone_no: item.phone_no,
+                            phone_code: item.phone_code,
                             email_id: item.email_id,
                             password: uniqid.time(),
                             parent_id: profile_data.insertId,
@@ -161,7 +162,14 @@ const UserController = {
 
 
             console.log(err)
-
+            if (err.code == 'ER_DUP_ENTRY'){
+                new Response(
+                    res,
+                    StatusCodes.OK
+                )._ErrorMessage(
+                   "User already exist"
+                )
+             }
             /**
              * ANCHOR user creation and machine creation error handler
              */
@@ -340,11 +348,12 @@ const UserController = {
     async addContactUsers(req,res){
         try{
             // let{ id } =req.query;
-            let {id,first_name, last_name,phone_no,email_id,profile_pic} = req.body;
+            let {id,first_name, last_name,phone_no,phone_code,email_id,profile_pic} = req.body;
             membersdata= {
                 first_name: first_name,
                 last_name:last_name,
                 phone_no: phone_no,
+                phone_code:phone_code,
                 email_id: email_id,
                 profile_pic:profile_pic,
                 password: uniqid.time(),
@@ -369,7 +378,14 @@ const UserController = {
             }
         }catch(err){
             console.log(err)
-
+             if (err.code == 'ER_DUP_ENTRY'){
+                new Response(
+                    res,
+                    StatusCodes.OK
+                )._ErrorMessage(
+                   "Contact already exist"
+                )
+             }
             /**
              * ANCHOR user creation and machine creation error handler
              */

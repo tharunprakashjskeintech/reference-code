@@ -23,7 +23,7 @@ const subscriptionController = {
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )
@@ -51,7 +51,7 @@ async addOrder(req,res){
         }else{
             new Response(
                 res,
-                StatusCodes.BAD_REQUEST
+                StatusCodes.OK
             )._ErrorMessage(
                 Message.OrderManagement.FailureMessage.Create
             )
@@ -69,7 +69,7 @@ async addOrder(req,res){
 async addTransaction(req,res){
     let {user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date} = req.body;
     try{
-        let [subscription] = await SubscriptionModel.addTransaction({user_id,payment_type,total_amount,trx_id,status,subscription_id,dateuser_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date})
+        let [subscription] = await SubscriptionModel.addTransaction({user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date})
         if(subscription){
             new Response(
                 res,
@@ -79,7 +79,7 @@ async addTransaction(req,res){
         }else{
             new Response(
                 res,
-                StatusCodes.BAD_REQUEST
+                StatusCodes.OK
             )._ErrorMessage(
                 Message.TransactionManagement.FailureMessage.Create
             )
@@ -107,7 +107,7 @@ async getOrder(req,res){
         }else{
             new Response(
                 res,
-                StatusCodes.BAD_REQUEST
+                StatusCodes.OK
             )._ErrorMessage(
                 Message.OrderManagement.FailureMessage.Create
             )
@@ -135,7 +135,7 @@ async getTransaction(req,res){
         }else{
             new Response(
                 res,
-                StatusCodes.BAD_REQUEST
+                StatusCodes.OK
             )._ErrorMessage(
                 Message.TransactionManagement.FailureMessage.Create
             )
@@ -163,7 +163,7 @@ async getTransaction(req,res){
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )
@@ -192,7 +192,7 @@ async getTransaction(req,res){
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )
@@ -221,7 +221,7 @@ async getTransaction(req,res){
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )
@@ -251,7 +251,7 @@ async getTransaction(req,res){
             }else{
                 new Response(
                     res,
-                    StatusCodes.BAD_REQUEST
+                    StatusCodes.OK
                 )._ErrorMessage(
                     Message.SubscriptionManagement.FailureMessage.Create
                 )

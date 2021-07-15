@@ -20,15 +20,15 @@ const UserModel = {
    return await database.promise().query(QueryGenerator.format(query, {email_id}))
             
     },
-    async createUserProfile({role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_code,country,network_type,zip_code,
+    async createUserProfile({role_id,email_id, phone_no, first_name,last_name,profile_pic,address,city,state, phone_code,country,network_type,zip_code,
         network_name,security_type,security_password,router_picture,delivery_address,parent_id}) {
         let query;
         // Query generator can generate a insert query based on object we passed
         if(role_id == 2){
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_code,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,last_name,profile_pic,address,city,state, phone_code,country,network_connectivity:network_type,zip_code,password:uniqid.time()})
 
         }else{
-            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,profile_pic,address,city,state, phone_codecountry,zip_code,parent_id,password:uniqid.time()});
+            query = QueryGenerator.insert("meety_users", {role_id,email_id, phone_no, first_name,last_name,profile_pic,address,city,state, phone_code,country,zip_code,parent_id,password:uniqid.time()});
             query += `;${QueryGenerator.insert(`meety_user_security_details`, { user_id: QueryGenerator.LAST_INSERTID, network_name,security_type,security_password,router_picture,delivery_address })}`
       
         }
@@ -95,7 +95,7 @@ const UserModel = {
         left join meety_internet_connectivity_plan i 
         on xref.internet_plan_id = i.id
         left join meety_user_security_details sec 
-        on u.id= sec.user_id where u.role_id = 3`)
+        on u.id= sec.user_id where u.role_id = 3 group by u.id`)
         return await database.promise().query(query)
     },
     async getAllDeatails({type}) {
