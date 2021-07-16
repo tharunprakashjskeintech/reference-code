@@ -101,16 +101,45 @@ const UserModel = {
     async getAllDeatails({type}) {
         let query;
         if(type == "DASHBOARD"){
-         query = QueryGenerator.format(`SELECT COUNT(*) as count , 'USER' as role
-        FROM meety_users where role_id NOT IN (1);
+         query = QueryGenerator.format(`SELECT COUNT(*) as count , 'USER' as role , created_at 
+        FROM meety_users where role_id NOT IN (1) GROUP BY meety_users.created_at  
+        ORDER BY meety_users.created_at;
         SELECT COUNT(*) as count , 'SUBSCRIPTIONS' as role
-        FROM meety_user_parent_xref;
-         SELECT COUNT(*) as count , 'DELIVERYORDERS' as role
-        FROM meety_order_details WHERE status = 'DELIVERED';
-         SELECT COUNT(*) as count , 'PENDINGORDERS' as role
-        FROM meety_order_details WHERE status = 'PENDING';
-         SELECT COUNT(*) as count , 'TRANSCATIONS' as role
-        FROM meety_transactions;`)
+        FROM meety_user_parent_xref ;
+         SELECT COUNT(*) as count , 'DELIVERYORDERS' as role, meety_order_details.created_at 
+        FROM  meety_order_details WHERE status = 'DELIVERED' GROUP BY meety_order_details.created_at  
+        ORDER BY meety_order_details.created_at;
+         SELECT COUNT(*) as count , 'PENDINGORDERS' as role , meety_order_details.created_at 
+        FROM meety_order_details WHERE status = 'PENDING' GROUP BY meety_order_details.created_at  
+        ORDER BY meety_order_details.created_at;
+         SELECT COUNT(*) as count , 'TRANSCATIONS' as role, created_at 
+        FROM meety_transactions GROUP BY meety_transactions.created_at  
+        ORDER BY meety_transactions.created_at;`)
+
+    //     query = QueryGenerator.format(`CAST(
+    //        CONCAT(
+    //            '[',
+    //            GROUP_CONCAT(
+    //             JSON_OBJECT(
+    //                 'reply_message_id',
+    //                 am.id,
+    //                 'user_read',
+    //                 am.user_read,
+    //                 'admin_read',
+    //                 am.admin_read,
+    //                 'message',
+    //                 am.message,
+    //                 'message_by',
+    //                 am.message_by,
+    //                 'message_on',
+    //                 am.message_on
+                   
+    //             )
+    //         ) ,
+    //         ']'
+    //        ) as JSON
+    //    )  as replies`);
+        
         
     }
     else if(type == "USERS"){
