@@ -177,6 +177,22 @@ console.log(id,device_token)
 
  
     },
+
+    async getSecurityDetailsById({
+        user_id
+    }) {
+
+console.log(user_id)
+        return await database.promise().query(QueryGenerator.format(`
+        select network_name,security_type,security_password,router_picture from meety_user_security_details  WHERE user_id = :user_id  `,
+            {
+                user_id
+
+            }))
+
+
+ 
+    },
      //update 
 
   async findByIdAndUpdate(id, user) {
@@ -235,6 +251,16 @@ console.log(id,device_token)
         return await database.promise().query(query)
     
       },
+      async getDeviceToken({ id }) {
+
+        return await database.promise().query(
+            QueryGenerator.format(
+                `SELECT token from meety_users where id = ? `,
+                [id]
+            )
+        )
+
+    },
 }
 
 

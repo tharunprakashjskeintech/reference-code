@@ -14,18 +14,18 @@ const logger = require("../utils/winston")
 
 
 
-async function sendNotification({ user_id, body }) {
-    let [getdeviceToken] = await UserModel.getDeviceToken({ user_id })
+async function sendNotification({ id,msg }) {
+    let [getdeviceToken] = await UserModel.getDeviceToken({ id })
     if (getdeviceToken.length) {
 
 
 
-        if (getdeviceToken[0].token != null) {
+        if (getdeviceToken[0].fcm_token != null) {
             var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-                to: getdeviceToken[0].token,
+                to: getdeviceToken[0].fcm_token,
                 notification: {
                     title: 'Meety App',
-                    body: body,
+                    body: msg,
                     "click_action": "FCM_PLUGIN_ACTIVITY",
                 },
                 // "data": {

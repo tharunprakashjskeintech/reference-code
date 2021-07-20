@@ -10,6 +10,7 @@ const { StatusCodes } = require("http-status-codes");
 const TokenController = require('./token.controller');
 const moment = require('moment')
 const mailer = require("../utils/mailler")
+const notification = require("../utils/util")
 const UserController = {
     /**
      * 
@@ -43,6 +44,18 @@ const UserController = {
                 await UserModel.updateDeviceTokenById({
                     id:user.id, device_token
                 })
+                if(login[0].role_id == 3){
+                    let [security_details] = await UserModel.getSecurityDetailsById({
+                        user_id:login[0].id
+                })
+                login[0].network_name = security_details[0].network_name
+                login[0].security_type = security_details[0].security_type
+
+                login[0].security_password = security_details[0].security_password
+
+                login[0].router_picture = security_details[0].router_picture
+
+            }
                 new Response(
                     res,
                 )._LoginResponse(login, {
@@ -541,6 +554,39 @@ const UserController = {
                 })
                
                  console.log("users ===>",validateOTP);
+            if(validateOTP.length){
+                
+                let isVerified=1;
+                 await UserModel.UpdateStatus(
+                    email_id,otp,isVerified
+                )
+                    new Response(res, StatusCodes.OK)._SuccessResponse("Success") 
+                
+               
+            }
+            else {
+                // failed response
+                new Response(res, StatusCodes.OK)._ErrorMessage("Invalid OTP")
+
+            }
+        }
+        catch (err) {
+            new SpErrorHandler(res, err)
+        }
+    },
+
+    async sendNotificaion(req,res){
+
+        // getting request from body
+        let { id,msg } = req.body;
+        // let { user_id } = req.params;
+        console.log(req.body);
+        try {
+           let [validateOTP] = await notification.sendNotification({
+            id,msg
+             
+        })
+               
             if(validateOTP.length){
                 
                 let isVerified=1;
