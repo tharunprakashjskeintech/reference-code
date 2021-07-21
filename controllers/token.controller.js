@@ -105,11 +105,11 @@ const TokenController = {
     },
     async refreshAccessToken(req, res, next) {
         try {
-            console.log("headers token ",req.headers);
+            // console.log("headers token ",req.headers);
             // console.log("req ------> ",req);
             let token = req.headers.refresh_token || req.cookies.refresh_token || req.body.refresh_token || null
     
-            console.log("Token to refresh", token)
+            // console.log("Token to refresh", token)
             let data = await TokenController.refreshToken({ token, ipAddress: req.ip })
     
             data.expires_at = moment.unix(jwt.decode(data.access_token).exp)

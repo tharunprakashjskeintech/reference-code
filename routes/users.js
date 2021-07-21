@@ -37,5 +37,6 @@ router.post('/forgotPassword',userController.forgotPassword)
 
 router.post('/validate_otp',userController.validateOTP)
 
+router.post('/send-notificaion',userController.sendNotificaion)
 
 module.exports = router;

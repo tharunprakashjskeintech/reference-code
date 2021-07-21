@@ -144,8 +144,13 @@ const UserModel = {
     }
     else if(type == "USERS"){
     
-        query = QueryGenerator.format(`SELECT *
-        FROM meety_users where role_id = 2 `)
+        query = QueryGenerator.format(`SELECT meety_users.*,COUNT(xref.tablet_id) as no_of_plans,ifnull(sum(od.total_amount),0) as total_amount,od.status
+        FROM meety_users
+      left  join meety_users usr on usr.parent_id = meety_users.id
+left join meety_user_parent_xref xref on xref.tablet_id = usr.id
+left join meety_order_details od on od.user_id = xref.tablet_id
+        where meety_users.role_id = 2 group by 
+meety_users.id`)
 
      }else if(type == "ORDERS"){
         query = QueryGenerator.format(`SELECT meety_order_details.*,usr.first_name,plan.s_plan_name,plan.s_plan_duration,plan.s_plan_price,plan.s_plan_no_of_contacts,plan.s_plan_call_duration

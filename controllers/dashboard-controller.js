@@ -12,9 +12,10 @@ const dashboardController = {
 
 
     async getdashboard(req,res){
-        let { id } = req.user
+        let { id,role_id } = req.user
         try{
-            let [dashboard] = await DashboardModel.getdashboard({id})
+            let [dashboard] = await DashboardModel.getdashboard({id,role_id})
+
             if(dashboard){
                 new Response(
                     res,
