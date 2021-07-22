@@ -61,10 +61,10 @@ const UserModel = {
         // Query generator can generate a insert query based on object we passed
         return await database.promise().query(query)
     },
-    async changePasswordById({ email_id, password }) {
+    async changePasswordById({ id, password }) {
         let query = QueryGenerator.format(
             `UPDATE meety_users SET meety_users.password  = ?,meety_users.login_status = 'COMPLETED'
-           WHERE email_id = ?`, [password, email_id]
+           WHERE id = ?`, [password, id]
         )
 
         return await database.promise().query(

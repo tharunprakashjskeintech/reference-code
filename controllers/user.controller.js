@@ -193,7 +193,7 @@ const UserController = {
         try {
 
             let {
-                email_id,
+                id,
                 password
             } = req.body
             /**
@@ -205,7 +205,7 @@ const UserController = {
 
             //  let { id } = req.user
             let [changepassword] = await UserModel.changePasswordById({
-                email_id,
+                id,
                 password
             })
             console.log("change password === > ", changepassword);
