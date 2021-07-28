@@ -67,8 +67,10 @@ async addOrder(req,res){
     }
 },
 async addTransaction(req,res){
-    let {user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date} = req.body;
+    let {user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response} = req.body;
     try{
+        var date = new Date();
+        date = date.toISOString().slice(0,10)
         let [subscription] = await SubscriptionModel.addTransaction({user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date})
         if(subscription){
             new Response(
