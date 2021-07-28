@@ -180,9 +180,9 @@ async getTransaction(req,res){
     },
 
     async createInternetPlan(req,res){
-        let { network_type, price,durationduration } = req.body
+        let { network_type, price,duration } = req.body
         try{
-            let [subscription] = await SubscriptionModel.createInternetPlan({network_type, price,durationduration})
+            let [subscription] = await SubscriptionModel.createInternetPlan({network_type, price,duration})
             if(subscription){
                 new Response(
                     res,

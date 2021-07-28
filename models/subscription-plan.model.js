@@ -47,10 +47,10 @@ const SubscriptionModel = {
 
     },
 
-    async createInternetPlan({network_type, price,durationduration}) {
+    async createInternetPlan({network_type, price,duration}) {
         let query;
         // Query generator can generate a insert query based on object we passed
-        query = QueryGenerator.insert("meety_internet_connectivity_plan", {network_type, price,durationduration})
+        query = QueryGenerator.insert("meety_internet_connectivity_plan", {network_type, price,duration})
         return await database.promise().query(query)
 
     },
