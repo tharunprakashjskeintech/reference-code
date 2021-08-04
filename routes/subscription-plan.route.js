@@ -1,6 +1,6 @@
 var express = require('express');
 const { authenticate } = require('../utils/authenticate');
-const subscriptionController = require('../controllers/subscription-plan-controller ');
+const subscriptionController = require('../controllers/subscription-plan-controller');
 var router = express.Router();
 const TokenAuth = require('../utils/authenticate')
 
