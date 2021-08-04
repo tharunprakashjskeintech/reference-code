@@ -39,6 +39,7 @@ io.on('connect', function (socket) {
     console.log("Connected");
     chatID = socket.handshake.query.chatID
     socket.join(chatID)
+    
 var getMessages = async function (id) {
 
     
@@ -58,9 +59,9 @@ var getMessages = async function (id) {
         data = JSON.parse(data)
         let {id} = socket.decoded;
 
-        // receiverChatID = message.receiverChatID
-        // senderChatID = message.senderChatID
-        // content = message.content
+        receiverChatID = message.receiverChatID
+        senderChatID = message.senderChatID
+        content = message.content
        
         let{messages,admin_read,status} =data;
        
