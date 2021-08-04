@@ -31,6 +31,9 @@ io.use(function (socket, next) {
 
 io.on('connect', function (socket) {
     console.log("Connected");
+    chatID = socket.handshake.query.chatID
+    socket.join(chatID)
+    
 var getMessages = async function (id) {
 
     
@@ -49,6 +52,10 @@ var getMessages = async function (id) {
   socket.on('create-message' ,async function(data)  {
         data = JSON.parse(data)
         let {id} = socket.decoded;
+
+        receiverChatID = message.receiverChatID
+        senderChatID = message.senderChatID
+        content = message.content
        
         let{messages,admin_read,status} =data;
        
@@ -57,11 +64,34 @@ var getMessages = async function (id) {
             
         })
  
-        
+         //Send message to only that particular room
+         socket.in(receiverChatID).emit('receive_message', {
+            'content': content,
+            'senderChatID': senderChatID,
+            'receiverChatID':receiverChatID,
+        })
+
+        socket.on('disconnect', () => {
+            socket.leave(chatID)
+        })
 
         getMessages(id);
        
     })
+
+
+    // socket.on('send_message', message => {
+    //     receiverChatID = message.receiverChatID
+    //     senderChatID = message.senderChatID
+    //     content = message.content
+
+    //     //Send message to only that particular room
+    //     socket.in(receiverChatID).emit('receive_message', {
+    //         'content': content,
+    //         'senderChatID': senderChatID,
+    //         'receiverChatID':receiverChatID,
+    //     })
+    // })
     
 
 })
