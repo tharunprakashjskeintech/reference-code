@@ -21,7 +21,8 @@ const SubscriptionModel = {
     async addTransaction({user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date}) {
         let query;
         // Query generator can generate a insert query based on object we passed
-        query = QueryGenerator.insert("meety_transactions", {user_id,payment_type,amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response,date})
+        query = QueryGenerator.insert("meety_transactions", {user_id,payment_type,
+amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_gateway_callback_response})
         return await database.promise().query(query)
 
     },

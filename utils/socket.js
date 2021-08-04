@@ -3,13 +3,7 @@ var jwt = require('jsonwebtoken')
 const { database } = require('./database')
 const ChatModel = require("../models/chat.model");
 var io = require('socket.io')(process.env.SOCKET_PORT,
-    {
-        cors: {
-            origin: '*',
-        
-        },
-        
-    }
+    { }
 )
 
 

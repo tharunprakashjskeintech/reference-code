@@ -39,8 +39,10 @@ const subscriptionController = {
         }
     },
 async addOrder(req,res){
-    let { user_id,payment_type,total_amount,trx_id,status,subscription_id,date} = req.body;
+    let { user_id,payment_type,total_amount,trx_id,status,subscription_id} = req.body;
     try{
+var date = new Date();
+        date = date.toISOString().slice(0,10)
         let [subscription] = await SubscriptionModel.addOrder({user_id,payment_type,total_amount,trx_id,status,subscription_id,date})
         if(subscription){
             new Response(
