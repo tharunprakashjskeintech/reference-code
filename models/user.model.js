@@ -7,7 +7,7 @@ const uniqid = require('uniqid')
 
 const UserModel = {
     async getLogin({email_id, password}) {
-        return await database.promise().query(QueryGenerator.format(`select * from meety_users where email_id=? and password=?`,[email_id,password]))
+        return await database.promise().query(QueryGenerator.format(`select * from meety_users where email_id=? and BINARY password=?`,[email_id,password]))
 
     },
 
@@ -114,7 +114,8 @@ const UserModel = {
         ORDER BY meety_order_details.created_at;
          SELECT COUNT(*) as count , 'TRANSCATIONS' as role, created_at 
         FROM meety_transactions GROUP BY meety_transactions.created_at  
-        ORDER BY meety_transactions.created_at;`)
+        ORDER BY meety_transactions.created_at;
+        `)
 
     //     query = QueryGenerator.format(`CAST(
     //        CONCAT(
@@ -159,7 +160,10 @@ meety_users.id`)
 join meety_subscription_plan as plan on plan.id= meety_order_details.subscription_id`)
      }else if(type == "TRANSCATIONS"){
         query = QueryGenerator.format(`SELECT *
-        FROM meety_transactions `)
+        FROM meety_transactions
+        join meety_users usr on usr.id = meety_transactions.user_id
+        join meety_user_parent_xref xref on xref.tablet_id = usr.id
+        join meety_subscription_plan s_plan on s_plan.id = xref.subscription_id group by meety_transactions.id`)
      }else if(type == "SUBSCRIPTIONS"){
         query = QueryGenerator.format(`SELECT *
         FROM meety_subscription_plan `)
@@ -266,6 +270,26 @@ console.log(user_id)
         )
 
     },
+
+    async getDashboardDetails() {
+
+        return await database.promise().query(
+            QueryGenerator.format(
+                `SELECT COUNT(*) as count , 'USER' as role
+                FROM meety_users where role_id NOT IN (1);
+                SELECT COUNT(*) as count , 'SUBSCRIPTIONS' as role
+                FROM meety_user_parent_xref;
+                 SELECT COUNT(*) as count , 'DELIVERYORDERS' as role
+                FROM meety_order_details WHERE status = 'DELIVERED';
+                 SELECT COUNT(*) as count , 'PENDINGORDERS' as role
+                FROM meety_order_details WHERE status = 'PENDING';
+                 SELECT sum(amount) as amount , "TRANSCATIONS" as role
+                FROM meety_transactions;`
+            )
+        )
+
+    },
+
 }
 
 

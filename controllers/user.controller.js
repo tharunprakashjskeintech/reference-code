@@ -10,7 +10,8 @@ const { StatusCodes } = require("http-status-codes");
 const TokenController = require('./token.controller');
 const moment = require('moment')
 const mailer = require("../utils/mailler")
-const notification = require("../utils/util")
+const notification = require("../utils/util");
+const { merge } = require('../routes/users');
 const UserController = {
     /**
      * 
@@ -18,7 +19,9 @@ const UserController = {
      * @param {*} res 
      */
     async getLogin(req, res) {
-        let { email_id, password,device_token } = req.body
+        let { email_id, password,device_token,role_id } = req.body
+        console.log("----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",req.body);
+
         try {
             let [userExist]=await UserModel.findEmail({
                 email_id
@@ -26,8 +29,19 @@ const UserController = {
             if (userExist.length) {
             let [login] = await UserModel.getLogin({ email_id, password })
            
-            if(login.length != 0){ 
-            
+            if(login.length != 0){
+                console.log(role_id+"---"+login[0].role_id)
+                if(role_id) {
+            if(role_id != login[0].role_id){
+
+                res.send({
+                    status: false,
+                    message: "You don't have access!"
+                })
+                return false
+            }
+        }
+console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
             let user = {
                 id: login[0].id,
                 role_id: login[0].role_id,
@@ -85,7 +99,8 @@ const UserController = {
             res,
             StatusCodes.OK
         )._ErrorMessage(
-            "Entered User not Registered please register now!"
+            // "Entered User not Registered please register now!"
+            "Please enter valid Email id and password"
         )
     }
         } catch (err) {
@@ -238,7 +253,13 @@ const UserController = {
         try{
             if(type == "DASHBOARD"){
                 let [dashboard] = await UserModel.getAllDeatails({type})
+                let [dashboarddetails] = await UserModel.getDashboardDetails();
+                console.log("dashboarddetails-->",dashboarddetails);
                 var merged = [].concat.apply([], dashboard);
+                // var merged1 = [].concat.apply([], dashboarddetails);
+
+                        merged.push({"dashboarddetails":dashboarddetails})
+                console.log("merged-->",merged.dashboarddetails);
             }else{
                 let [dashboard] = await UserModel.getAllDeatails({type})
               var merged = dashboard;
