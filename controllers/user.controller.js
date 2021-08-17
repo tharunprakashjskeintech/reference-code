@@ -251,8 +251,9 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
     async getAllDeatails(req,res){
         let { type } = req.body
         try{
+
             if(type == "DASHBOARD"){
-                let [dashboard] = await UserModel.getAllDeatails({type})
+                let [dashboard] = await UserModel.getAllDetails({type})
                 let [dashboarddetails] = await UserModel.getDashboardDetails();
                 console.log("dashboarddetails-->",dashboarddetails);
                // var merged = [].concat.apply([], dashboard);

@@ -98,7 +98,7 @@ const UserModel = {
         on u.id= sec.user_id where u.role_id = 3 group by u.id`)
         return await database.promise().query(query)
     },
-    async getAllDeatails({type}) {
+    async getAllDetails({type}) {
         let query;
         if(type == "DASHBOARD"){
          query = QueryGenerator.format(`SELECT COUNT(*) as count , 'USER' as role , created_at 
@@ -117,30 +117,6 @@ const UserModel = {
         ORDER BY meety_transactions.created_at;
         `)
 
-    //     query = QueryGenerator.format(`CAST(
-    //        CONCAT(
-    //            '[',
-    //            GROUP_CONCAT(
-    //             JSON_OBJECT(
-    //                 'reply_message_id',
-    //                 am.id,
-    //                 'user_read',
-    //                 am.user_read,
-    //                 'admin_read',
-    //                 am.admin_read,
-    //                 'message',
-    //                 am.message,
-    //                 'message_by',
-    //                 am.message_by,
-    //                 'message_on',
-    //                 am.message_on
-                   
-    //             )
-    //         ) ,
-    //         ']'
-    //        ) as JSON
-    //    )  as replies`);
-        
         
     }
     else if(type == "USERS"){
