@@ -20,7 +20,7 @@ const UserController = {
      */
     async getLogin(req, res) {
         let { email_id, password,device_token,role_id } = req.body
-        console.log("----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",req.body);
+        logger.info("----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",req.body);
 
         try {
             let [userExist]=await UserModel.findEmail({
@@ -255,9 +255,10 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
                 let [dashboard] = await UserModel.getAllDeatails({type})
                 let [dashboarddetails] = await UserModel.getDashboardDetails();
                 console.log("dashboarddetails-->",dashboarddetails);
-                var merged = [].concat.apply([], dashboard);
+               // var merged = [].concat.apply([], dashboard);
                 // var merged1 = [].concat.apply([], dashboarddetails);
-
+                var merged = [];
+                merged.push(dashboard)
                         merged.push({"dashboarddetails":dashboarddetails})
                 console.log("merged-->",merged.dashboarddetails);
             }else{
