@@ -255,7 +255,9 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
             if(type == "DASHBOARD"){
                 let [dashboard] = await UserModel.getAllDetails({type})
                 let [dashboarddetails] = await UserModel.getDashboardDetails();
-                console.log("dashboarddetails-->",dashboarddetails);
+                logger.info("dashboarddetails-->",dashboard);
+
+                logger.info("dashboarddetails-->",dashboarddetails);
                // var merged = [].concat.apply([], dashboard);
                 // var merged1 = [].concat.apply([], dashboarddetails);
                 var merged = [];
