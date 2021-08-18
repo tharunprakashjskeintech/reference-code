@@ -3,6 +3,8 @@ const database = require("../utils/database")
 const QueryGenerator = require("../generators/query.generator")
 
 const uniqid = require('uniqid')
+const { end } = require("../utils/database")
+const logger = require("../utils/winston")
 
 
 const UserModel = {
@@ -98,24 +100,24 @@ const UserModel = {
         on u.id= sec.user_id where u.role_id = 3 group by u.id`)
         return await database.promise().query(query)
     },
-    async getAllDetails({type}) {
+    async getAllDetails({type,startDate,endDate}) {
         let query;
         if(type == "DASHBOARD"){
          query = QueryGenerator.format(`SELECT COUNT(*) as count , 'USER' as role , created_at 
-        FROM meety_users where role_id NOT IN (1) GROUP BY meety_users.created_at  
-        ORDER BY meety_users.created_at;
+         FROM meety_users where role_id NOT IN (1) AND (created_at BETWEEN ? AND ?) GROUP BY meety_users.created_at  
+         ORDER BY meety_users.created_at;
         SELECT COUNT(*) as count , 'SUBSCRIPTIONS' as role
         FROM meety_user_parent_xref ;
          SELECT COUNT(*) as count , 'DELIVERYORDERS' as role, meety_order_details.created_at 
-        FROM  meety_order_details WHERE status = 'DELIVERED' GROUP BY meety_order_details.created_at  
+        FROM  meety_order_details WHERE status = 'DELIVERED' AND (created_at BETWEEN ? AND ? )  GROUP BY meety_order_details.created_at  
         ORDER BY meety_order_details.created_at;
          SELECT COUNT(*) as count , 'PENDINGORDERS' as role , meety_order_details.created_at 
-        FROM meety_order_details WHERE status = 'PENDING' GROUP BY meety_order_details.created_at  
+        FROM meety_order_details WHERE status = 'PENDING' AND (created_at BETWEEN  ? AND ?)  GROUP BY meety_order_details.created_at  
         ORDER BY meety_order_details.created_at;
          SELECT COUNT(*) as count , 'TRANSCATIONS' as role, created_at 
-        FROM meety_transactions GROUP BY meety_transactions.created_at  
+        FROM meety_transactions where (created_at BETWEEN  ? AND ? )  GROUP BY meety_transactions.created_at  
         ORDER BY meety_transactions.created_at;
-        `)
+        `,[startDate,endDate,startDate,endDate,startDate,endDate,startDate,endDate])
 
         
     }
@@ -228,6 +230,14 @@ console.log(user_id)
     return await database.promise().query(query)
 
   },
+    // update
+    async UpdateNotification(user_id,title, message) {
+         logger.info("notifuc=======================",user_id,title, message)
+        let query = QueryGenerator.insert('meety_notification_logs', {user_id,title, message})
+    
+        return await database.promise().query(query)
+    
+      },
     // delete
     async findByIdAndDelete(id) {
 
@@ -240,7 +250,7 @@ console.log(user_id)
 
         return await database.promise().query(
             QueryGenerator.format(
-                `SELECT token from meety_users where id = ? `,
+                `SELECT fcm_token from meety_users where id = ? `,
                 [id]
             )
         )

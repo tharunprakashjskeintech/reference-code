@@ -41,7 +41,6 @@ const UserController = {
                 return false
             }
         }
-console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
             let user = {
                 id: login[0].id,
                 role_id: login[0].role_id,
@@ -249,15 +248,17 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
         }
     },
     async getAllDeatails(req,res){
-        let { type } = req.body
+        let { type,startDate,endDate } = req.body
+        logger.info("dashboarddetails-->",req.body);
+
         try{
 
             if(type == "DASHBOARD"){
-                let [dashboard] = await UserModel.getAllDetails({type})
+                let [dashboard] = await UserModel.getAllDetails({type,startDate,endDate})
                 let [dashboarddetails] = await UserModel.getDashboardDetails();
-                logger.info("dashboarddetails-->",dashboard);
+              //  logger.info("dashboarddetails-->",dashboard);
 
-                logger.info("dashboarddetails-->",dashboarddetails);
+                //logger.info("dashboarddetails-->",dashboarddetails);
                // var merged = [].concat.apply([], dashboard);
                 // var merged1 = [].concat.apply([], dashboarddetails);
                 var merged = [];
@@ -602,22 +603,23 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
     },
 
     async sendNotificaion(req,res){
+        logger.info("body------",req.body);
 
         // getting request from body
         let { id,msg } = req.body;
         // let { user_id } = req.params;
-        console.log(req.body);
+        logger.info("body------",req.body);
         try {
-           let [validateOTP] = await notification.sendNotification({
+          let notify = await  notification.sendNotification({
             id,msg
              
         })
-               
-            if(validateOTP.length){
+               logger.info("notification------------",notify)
+            if(notify.res == 'success'){
                 
-                let isVerified=1;
-                 await UserModel.UpdateStatus(
-                    email_id,otp,isVerified
+                
+                 await UserModel.UpdateNotification(
+                    13,"otp","isVerified"
                 )
                     new Response(res, StatusCodes.OK)._SuccessResponse("Success") 
                 
@@ -628,6 +630,7 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
                 new Response(res, StatusCodes.OK)._ErrorMessage("Invalid OTP")
 
             }
+            new Response(res, StatusCodes.OK)._SuccessResponse("Success") 
         }
         catch (err) {
             new SpErrorHandler(res, err)
