@@ -469,7 +469,7 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
            * @param {*} req 
            * @param {*} res 
            */
-     async update(req, res) {
+     /*async update(req, res) {
 
         // getting request from body
         let {role_id, email_id, phone_no, first_name,last_name, profile_pic,address,phone_code,state, city, country, network_type, zip_code, network_name,
@@ -526,7 +526,7 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
         catch (err) {
             new SpErrorHandler(res, err)
         }
-    },
+    },*/
       //Forgot Password
       async forgotPassword(req, res) {
 
@@ -621,6 +621,34 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
             else {
                 // failed response
                 new Response(res, StatusCodes.OK)._ErrorMessage("Invalid OTP")
+
+            }
+        }
+        catch (err) {
+            new SpErrorHandler(res, err)
+        }
+    },
+    async update(req, res) {
+
+        // getting request from body
+        let {role_id,first_name,last_name,phone_no,email_id,password,address,city,state,phone_code,country,network_connectivity,zip_code,parent_id,login_status,auto_answer,auto_answer_time,profile_pic,fcm_token,created_at,updated_at} = req.body;
+        let { id } = req.params;
+        console.log(req.body);
+        try {
+
+
+    
+            let [userdetails] = await UserModel.findByIdAndUpdate(id,{role_id,first_name,last_name,phone_no,email_id,password,address,city,state,phone_code,country,network_connectivity,zip_code,parent_id,login_status,auto_answer,auto_answer_time,profile_pic,fcm_token,created_at,updated_at})
+             // CustomerDetails updatedted successfully
+            if (userdetails.affectedRows) {
+
+                // sending success response to client
+                new Response(res)._SuccessResponse(Message.Common.SuccessMessage.Updation("User"))
+
+            }
+            else {
+                // failed response
+                new Response(res, StatusCodes.OK)._ErrorMessage(Message.Common.FailureMessage.Updation("User"),userdetails)
 
             }
         }
