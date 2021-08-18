@@ -261,11 +261,12 @@ console.log("calling .....------------------------------------->>>>>>>>>>>>>>>>>
                // var merged = [].concat.apply([], dashboard);
                 // var merged1 = [].concat.apply([], dashboarddetails);
                 var merged = [];
-                merged.push(dashboard)
+             
+                merged.push({"dashboard":dashboard})
                         merged.push({"dashboarddetails":dashboarddetails})
                 console.log("merged-->",merged.dashboarddetails);
             }else{
-                let [dashboard] = await UserModel.getAllDeatails({type})
+                let [dashboard] = await UserModel.getAllDetails({type})
               var merged = dashboard;
             }
               
