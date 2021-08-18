@@ -71,6 +71,36 @@ amount,gateway,status,payment_gateway_trx_id,payment_gateway_response,payment_ga
         return await database.promise().query(query)
 
     },
+
+
+    async findByIdAndDelete(id) {
+
+        let query = QueryGenerator.format(`DELETE FROM meety_subscription_plan where id =? `, [id])
+    
+        return await database.promise().query(query)
+    
+      },
+      async findByIdAndDeleteInternetPlan(id) {
+
+        let query = QueryGenerator.format(`DELETE FROM meety_internet_connectivity_plan where id =? `, [id])
+    
+        return await database.promise().query(query)
+    
+      },
+      async findByIdAndUpdate(id, subscription) {
+
+        let query = QueryGenerator.update('meety_subscription_plan', subscription, { id: id })
+    
+        return await database.promise().query(query)
+    
+      },
+      async findById(id, internet) {
+
+        let query = QueryGenerator.update('meety_internet_connectivity_plan', internet, { id: id })
+    
+        return await database.promise().query(query)
+    
+      }
 }
 
 

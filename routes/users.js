@@ -29,7 +29,7 @@ router.post('/addContactUsers',FileUpload.base64ToImage("profile_pic", "profile_
 
 router.delete('/:id', userController.delete)
 
-router.put('/:id',FileUpload.base64ToImage("profile_pic", "profile_pic"), userController.update)
+router.put('/:id',FileUpload.base64ToImage("profile_pic"), userController.update)
 
 router.post('/system-admin',  userController.getAllDeatails)
 
