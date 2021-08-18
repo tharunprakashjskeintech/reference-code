@@ -6,9 +6,9 @@ var serverKey = 'AAAATNnn9d4:APA91bEAxdFNgWiNiQ6m0uluvHqpy9BkNnpN1Qyv0Y6iBSwPGv6
 var fcm = new FCM(serverKey);
 const logger = require("../utils/winston")
 
+var token ='eGIdEfmsT8SM9FCdDNodqK:APA91bFfyieffvASGKxx6Upy5A877zW8F-JJpG8hGqX48jGldc_RfVY0nwHlsCjoaF-N7FdRtp_iNpoY1ax3ANhxMbhE1MZFqD6kCHIZ6W_UTcp96CNuLYoG9ECWGLzULGV5P3N92wlY';
 
-
-
+var token1= 'fdZZh_pRTuiKAcBTbe6SZW:APA91bH8QF9k8CQzaijzOUwpxrhnPO78432cE9bMKFA_M2Q4rWN6zMJnE8ImXyg2Tys8wxvfzR8e4Z-z9tXtGHl1ubVGIDKQgK_A-D0fujlQoWBMvbNv38XP9Wzon8FZPUd9opGQlIdT';
 
 
 
@@ -16,13 +16,10 @@ const logger = require("../utils/winston")
 
 async function sendNotification({ id,msg }) {
     let [getdeviceToken] = await UserModel.getDeviceToken({ id })
-    if (getdeviceToken.length) {
-
-
-
-        if (getdeviceToken[0].fcm_token != null) {
+   // if (getdeviceToken.length) {
+       // if (getdeviceToken[0].fcm_token != null) {
             var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-                to: getdeviceToken[0].fcm_token,
+                to: token1,//'getdeviceToken[0].fcm_token,
                 notification: {
                     title: 'Meety App',
                     body: msg,
@@ -32,22 +29,24 @@ async function sendNotification({ id,msg }) {
                 //     "flag": "DISPATCH"  //Any data to be retrieved in the notification callback
                 // }
             };
-            fcm.send(message, function (err, response) {
+          await  fcm.send(message, function (err, response) {
 
                 if (err) {
-                    console.error("Something has gone wrong!", err);
-                    console.log("Something has gone wrong!", err);
+                    logger.info(err)
+                   logger.info("Something has gone wrong!", err);
+                    logger.info("Something has gone wrong!", err);
                     // callback("Error sending notification", null)
                     return "failure"
                 } else {
-                    console.log("Successfully sent with response: ", response);
+                    logger.info("Successfully sent with response: ", response);
                     //callback(null, "notification sent");
                     return "success"
                 }
             });
-        }
+       // }
 
-    }
+    //}
+    return {"res":"success"}
 }
 
 
