@@ -180,6 +180,20 @@ module.exports.Message = {
             Delete: "Tranaction deletion failed, kindly retry !",
             NotFound: "No Tranaction found !"
         }
-    },
+    },    
+        ChatMessage: {
+            SuccessMessage: {
+                Create: "message is created successful !",
+                Update: "message is updated successfully !",
+                Delete: "message is deleted successfully !",
+                Fetch: "message is fetched successfully !",
+            },
+            FailureMessage: {
+                Create: "message failed, kindly retry !",
+                Update: "message updation failed, kindly retry !",
+                Delete: "message deletion failed, kindly retry !",
+                NotFound: "No message found !"
+            }
+    }
 }
 
