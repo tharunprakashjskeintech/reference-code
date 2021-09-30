@@ -29,6 +29,7 @@ const UserController = {
             if (userExist.length) {
             let [login] = await UserModel.getLogin({ email_id, password })
            
+
             if(login.length != 0){
                 console.log(role_id+"---"+login[0].role_id)
                 if(role_id) {
